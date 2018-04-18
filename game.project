@@ -1,0 +1,20 @@
+[project]
+title = CaptainCapture
+dependencies = 
+
+[bootstrap]
+main_collection = /example/example.collectionc
+
+[display]
+width = 640
+height = 1136
+
+[script]
+shared_state = 1
+
+[html5]
+htmlfile = 
+
+[library]
+include_dirs = capture
+
