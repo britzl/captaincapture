@@ -155,11 +155,11 @@ void Capture_PlatformStart(const char* path) {
 	NSLog(@"Capture_PlatformStart %s", path);
 
 	@try {
-		//NSURL *url = [NSURL fileURLWithPath:[NSString stringWithUTF8String:path]];
-		//NSURL *url = [NSURL URLWithString:[NSString stringWithUTF8String:path]];
-		NSURL *url = [NSURL URLWithString:@"file://localhost/Users/bjornritzl/Downloads/foo.mov"];
+		NSURL *url = [NSURL fileURLWithPath:[NSString stringWithUTF8String:path]];
+		//NSURL *url = [NSURL URLWithString:@"file://localhost/Users/bjornritzl/Downloads/foo.mov"];
 		NSLog(@"Capture_PlatformStart url %@", url);
 		[Capture_GetRecorder().m_RecordingDelegate startRecording:url];
+		NSLog(@"Capture_PlatformStart after start");
 	}
 	@catch ( NSException *e ) {
 		NSLog(@"Capture_PlatformStart exception %@", e);

@@ -8,13 +8,13 @@
 
 static int Capture_Start(lua_State* L) {
 	int top = lua_gettop(L);
-	dmLogDebug("Capture_Start");
+	dmLogInfo("Capture_Start");
 
 	const char* path = luaL_checkstring(L, 1);
-	dmLogDebug("Capture_Start %s", path);
+	dmLogInfo("Capture_Start %s", path);
 	Capture_PlatformStart(path);
 
-	dmLogDebug("Capture_Start - done");
+	dmLogInfo("Capture_Start - done");
 
 	assert(top == lua_gettop(L));
 	return 0;
@@ -22,11 +22,11 @@ static int Capture_Start(lua_State* L) {
 
 static int Capture_Stop(lua_State* L) {
 	int top = lua_gettop(L);
-	dmLogDebug("Capture_Stop");
+	dmLogInfo("Capture_Stop");
 
 	Capture_PlatformStop();
 
-	dmLogDebug("Capture_Stop - done");
+	dmLogInfo("Capture_Stop - done");
 
 	assert(top == lua_gettop(L));
 	return 0;

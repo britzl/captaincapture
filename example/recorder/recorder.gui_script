@@ -1,0 +1,36 @@
+local dirtylarry = require "gooey.themes.dirtylarry.dirtylarry"
+local monarch = require "monarch.monarch"
+
+local function get_filename()
+	return sys.get_save_file("captaincapture", "screencapture.mov")
+end
+
+function init(self)
+	self.record = gui.get_node("record/bg")
+	self.stop = gui.get_node("stop/bg")
+	gui.set_enabled(self.record, true)
+	gui.set_enabled(self.stop, false)
+	msg.post(".", "acquire_input_focus")
+end
+
+function on_input(self, action_id, action)
+	dirtylarry.button("stop", action_id, action, function(button)
+		print("stop")
+		capture.stop()
+		share.file(get_filename(), "My cool movie")
+		monarch.show(hash("explorer"))
+	end)
+	dirtylarry.button("record", action_id, action, function(button)
+		print("record")
+		gui.play_particlefx(gui.get_node("particles"))
+		gui.set_enabled(self.record, false)
+		gui.set_enabled(self.stop, true)
+
+		capture.start(get_filename())
+		print("after start")
+	end)
+end
+function on_reload(self)
+	-- Add reload-handling code here
+	-- Remove this function if not needed
+end

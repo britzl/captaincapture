@@ -1,6 +1,6 @@
 [project]
 title = CaptainCapture
-dependencies = 
+dependencies = https://github.com/britzl/monarch/archive/2.3.0.zip,https://github.com/britzl/gooey/archive/6.0.2.zip,https://github.com/britzl/defold-lfs/archive/1.0.zip,https://github.com/britzl/defold-sharing/archive/1.3.0.zip
 
 [bootstrap]
 main_collection = /example/example.collectionc
@@ -17,4 +17,16 @@ htmlfile =
 
 [library]
 include_dirs = capture
+
+[particle_fx]
+max_particle_count = 2000
+
+[ios]
+bundle_identifier = com.britzl.defold.captaincapture
+
+[android]
+package = com.britzl.defold.captaincapture
+
+[osx]
+bundle_identifier = com.britzl.defold.captaincapture
 
