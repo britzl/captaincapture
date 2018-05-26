@@ -7,8 +7,8 @@ background_color {
 }
 nodes {
   position {
-    x: 484.0
-    y: 354.0
+    x: 320.0
+    y: 125.0
     z: 0.0
     w: 1.0
   }
@@ -132,7 +132,7 @@ nodes {
   }
   type: TYPE_TEXT
   blend_mode: BLEND_MODE_ALPHA
-  text: "HELO"
+  text: "RECORD"
   font: "dirtylarry"
   id: "record/label"
   xanchor: XANCHOR_NONE
@@ -209,7 +209,7 @@ nodes {
 nodes {
   position {
     x: 320.0
-    y: 84.0
+    y: 125.0
     z: 0.0
     w: 1.0
   }
