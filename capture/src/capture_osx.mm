@@ -87,9 +87,6 @@ Recorder g_Recorder;
 		[self->m_Session addOutput:self->m_MovieFileOutput];
 	}
 
-	// Start running the session
-	[self->m_Session startRunning];
-
 	// Delete any existing movie file first
 	if ([[NSFileManager defaultManager] fileExistsAtPath:[destPath path]])
 	{
@@ -100,12 +97,17 @@ Recorder g_Recorder;
 		}
 	}
 
-	// Start recording to the destination movie file
-	// The destination path is assumed to end with ".mov", for example, @"/users/master/desktop/capture.mov"
-	// Set the recording delegate to self
-	[self->m_MovieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		// Start running the session
+		[self->m_Session startRunning];
 
-	self->m_Recording = 1;
+		// Start recording to the destination movie file
+		// The destination path is assumed to end with ".mov", for example, @"/users/master/desktop/capture.mov"
+		// Set the recording delegate to self
+		[self->m_MovieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
+
+		self->m_Recording = 1;
+	});
 }
 
 -(void)stopRecording
@@ -116,9 +118,11 @@ Recorder g_Recorder;
 		return;
 	}
 
-	// Stop recording to the destination movie file
-	[self->m_MovieFileOutput stopRecording];
-	self->m_Recording = 0;
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		// Stop recording to the destination movie file
+		[self->m_MovieFileOutput stopRecording];
+		self->m_Recording = 0;
+	});
 }
 
 // AVCaptureFileOutputRecordingDelegate methods
@@ -127,12 +131,14 @@ Recorder g_Recorder;
 {
 	NSLog(@"Did finish recording to %@ due to error %@", [outputFileURL description], [error description]);
 
-	// Stop running the session
-	[self->m_Session stopRunning];
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		// Stop running the session
+		[self->m_Session stopRunning];
 
-	// Release the session
-	[self->m_Session release];
-	self->m_Session = nil;
+		// Release the session
+		[self->m_Session release];
+		self->m_Session = nil;
+	});
 }
 @end
 

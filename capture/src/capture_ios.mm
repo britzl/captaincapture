@@ -42,13 +42,15 @@ Recorder g_Recorder;
 		return;
 	}
 
-	NSDictionary *compressionProperties = @{AVVideoProfileLevelKey         : AVVideoProfileLevelH264HighAutoLevel,
+	NSDictionary *compressionProperties = @{
+		AVVideoProfileLevelKey         : AVVideoProfileLevelH264HighAutoLevel,
 		AVVideoH264EntropyModeKey      : AVVideoH264EntropyModeCABAC,
 		AVVideoAverageBitRateKey       : @(1920 * 1080 * 11.4),
 		AVVideoMaxKeyFrameIntervalKey  : @60,
 		AVVideoAllowFrameReorderingKey : @NO};
 
-	NSDictionary *videoSettings = @{AVVideoCompressionPropertiesKey : compressionProperties,
+	NSDictionary *videoSettings = @{
+		AVVideoCompressionPropertiesKey : compressionProperties,
 		AVVideoCodecKey                 : AVVideoCodecTypeH264,
 		AVVideoWidthKey                 : @1080,
 		AVVideoHeightKey                : @1920};
